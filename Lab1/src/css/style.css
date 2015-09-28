@@ -1,0 +1,20 @@
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+.block {
+    text-align: center;
+    width: 560px;
+    height: 180px;
+    background: #eee;
+    padding: 5px;
+    border: solid 1px #aaa;
+    float: left;
+    position: relative;
+}
+
+h3 {
+    text-decoration: underline;
+}
