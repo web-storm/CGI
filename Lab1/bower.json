@@ -20,6 +20,15 @@
   "dependencies": {
     "bootstrap": "~3.3.5",
     "jquery": "~2.1.4",
-    "moment": "~2.10.6"
+    "moment": "~2.10.6",
+    "jsrender": "~1.0.0-rc.70"
+  },
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "dist/css/bootstrap.css",
+        "dist/js/bootstrap.js"
+      ]
+    }
   }
 }
