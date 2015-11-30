@@ -1,6 +1,7 @@
 //dependecies
 var gulp = require('gulp');
 var runSequence = require('run-sequence');
+var ts = require('gulp-typescript');
 var del = require('del');
 var filter = require('gulp-filter');
 var htmlminify = require('gulp-minify-html');
@@ -63,6 +64,14 @@ gulp.task('build-js-dev', function() {
         .pipe($.jshint())// - улучшение js
         .pipe(gulp.dest(paths.js.devDest));
 });
+gulp.task('build-ts-dev', function () {
+    return gulp.src(paths.js.src+'*.ts')
+        .pipe(ts({
+            noImplicitAny: true,
+            out: 'script.js'
+        }))
+        .pipe(gulp.dest(paths.js.devDest));
+});
 gulp.task('build-css-dev', function() {
     return gulp.src(paths.styles.src+'*.css')
         .pipe(gulp.dest(paths.styles.devDest));
@@ -98,6 +107,16 @@ gulp.task('build-js-prod', function() {
         .pipe($.jshint())// - улучшение js
         .pipe($.uglify())
         .pipe($.rename('script.min.js'))
+        .pipe(gulp.dest(paths.js.prodDest));
+});
+gulp.task('build-ts-prod', function () {
+    return gulp.src(paths.js.src+'*.ts')
+        .pipe(ts({
+            noImplicitAny: true,
+            removeComments: true,
+            out: 'script.min.js'
+        }))
+        .pipe($.uglify())
         .pipe(gulp.dest(paths.js.prodDest));
 });
 gulp.task('build-css-prod', function() {

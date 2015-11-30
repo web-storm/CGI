@@ -21,12 +21,14 @@
     "gulp-minify-html": "^1.0.4",
     "gulp-processhtml": "^1.1.0",
     "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^1.6.0",
     "gulp-uglify": "^1.4.2",
     "gulp-uncss": "^1.0.4",
     "gulp-uncss-task": "^0.3.0",
     "main-bower-files": "^2.9.0",
     "path-exists": "^2.1.0",
     "run-sequence": "^1.1.4",
+    "typescript": "^1.6.2",
     "underscore": "^1.8.3",
     "underscore.string": "^3.2.2"
   }
