@@ -14,28 +14,36 @@ class iTunesService
 {
     requestUrl: string = "https://itunes.apple.com/search";
 
-    searchMusic(request: string): JQueryPromise<MusicInfo[]> {
-        return $.ajax(this.requestUrl,
-            {
-                type: 'GET',
-                data: {
-                    term: request
-                },
-                dataType: 'jsonp',
-                crossDomain: true
-            }).then(musicJSON => {return musicJSON.results;});
+    private searchMusic(request: string): JQueryPromise<MusicInfo[]> {
+        var ajaxSettings = {
+            type: 'GET',
+            data: {
+                term: request
+            },
+            dataType: 'jsonp',
+            crossDomain: true
+            //success: this.displayData
+        };
+        return $.ajax(this.requestUrl, ajaxSettings)
+            .then(musicJSON => {return musicJSON.results;});
     }
-    displayData(data: any) {
-    /*data.forEach(function(item) {
-        item.releaseDate = moment(item.releaseDate).format('MMM Do YYYY');
-    });*/
-    $( '#dataList' ).html(
-        $( '#dataTemplate' ).render( data.results )
-    );
-}
+
+    private test(request: string) {
+        var test1 = this.searchMusic(request)
+            .then(music => this.displayData(music));
+    }
+
+    private displayData(data: MusicInfo[]) {
+        data.forEach(function (item) {
+            //item.date = moment(item.date).format('MMM Do YYYY');
+        });
+        $('#dataList').html(
+            $('#dataTemplate').render(data)
+        );
+    }
 
     constructor() {
-        $("#submit_btn").click(() => this.searchMusic("Nightwish"));
+        $( '#submit_btn' ).click(() => this.test("Nightwish"));
     }
 }
 
