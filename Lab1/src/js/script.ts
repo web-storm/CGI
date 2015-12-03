@@ -3,10 +3,11 @@
 interface MusicInfo {
     artistName: string;
     trackName: string;
-    picUrl?: string;
-    album?: string;
+    artworkUrl100?: string;
+    collectionCensoredName?: string;
+    releaseDate?: string;
     date?: string;
-    genre?: string;
+    primaryGenreName?: string;
     previewUrl: string;
 }
 
@@ -14,7 +15,7 @@ class iTunesService
 {
     requestUrl: string = "https://itunes.apple.com/search";
 
-    private searchMusic(request: string): JQueryPromise<MusicInfo[]> {
+    private serverRequest(request: string): JQueryPromise<MusicInfo[]> {
         var ajaxSettings = {
             type: 'GET',
             data: {
@@ -22,20 +23,28 @@ class iTunesService
             },
             dataType: 'jsonp',
             crossDomain: true
-            //success: this.displayData
         };
         return $.ajax(this.requestUrl, ajaxSettings)
             .then(musicJSON => {return musicJSON.results;});
     }
 
-    private test(request: string) {
-        var test1 = this.searchMusic(request)
-            .then(music => this.displayData(music));
+    private changeWarningStatus(isEmpty: boolean) {
+        isEmpty ? $('#warning').show() : $('#warning').hide();
+    }
+
+    private musicSearch() {
+        var request = $("#term").val();
+        var isEmpty = request == "";
+        this.changeWarningStatus(isEmpty);
+        if (!isEmpty) {
+            this.serverRequest(request)
+                .then(music => this.displayData(music));
+        }
     }
 
     private displayData(data: MusicInfo[]) {
         data.forEach(function (item) {
-            //item.date = moment(item.date).format('MMM Do YYYY');
+            item.date = moment(item.releaseDate).format('MMM Do YYYY');
         });
         $('#dataList').html(
             $('#dataTemplate').render(data)
@@ -43,10 +52,9 @@ class iTunesService
     }
 
     constructor() {
-        $( '#submit_btn' ).click(() => this.test("Nightwish"));
+        $( '#submit_btn' ).bind('click', () => this.musicSearch());
     }
 }
-
 
 $(function() {
     var ui = new iTunesService();

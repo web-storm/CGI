@@ -28,5 +28,5 @@ function displayData(data) {
 }
 
 $(function() {
-   $('#submit_btn').click(search);
+   $('#submit_btn').bind('click',search);
 });

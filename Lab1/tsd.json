@@ -12,7 +12,10 @@
       "commit": "e48f0c7a0a5f9e9d35e9cfd7506461bab435cb49"
     },
     "moment/moment.d.ts": {
-      "commit": "e48f0c7a0a5f9e9d35e9cfd7506461bab435cb49"
+      "commit": "e850b6ac0d59fee86dd7cb6a1be2caf6400bde14"
+    },
+    "moment/moment-node.d.ts": {
+      "commit": "e850b6ac0d59fee86dd7cb6a1be2caf6400bde14"
     }
   }
 }
